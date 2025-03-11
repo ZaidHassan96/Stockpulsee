@@ -90,7 +90,8 @@ if not df.empty:
         weekly_volume = df['volume'].resample('W').sum().reset_index()
         weekly_volume['date'] = pd.to_datetime(weekly_volume['date'], errors='coerce')
         plt.bar(weekly_volume["date"], weekly_volume["volume"], color="blue",width=5)
-        plt.title(f'{stock_company} Weekly Stock Volume.', fontsize=25)
+        plt.title(f'{stock_company} Stock Volume.', fontsize=25)
+        plt.ylabel("Total Weekly Trading Volume", fontsize=30)
         show_price = st.button("Show Price Chart")
         button_placeholder.empty() 
     

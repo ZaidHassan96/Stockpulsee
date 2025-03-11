@@ -1,8 +1,6 @@
 import csv
 from pathlib import Path
-import streamlit as st
-from sqlalchemy import create_engine, text
-import traceback  # Add this for better error reporting
+from sqlalchemy import text
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -53,9 +51,7 @@ def seed_database():
             # Process and insert data in smaller batches
             for line in reader:
                 try:
-                    # Clean up the data
-                    if len(line) == 11:  # Handle the case where "Inc" is separated
-                        line.pop(7)
+                 
                     
                     # Replace empty values with None and remove quotes
                     cleaned_line = [item.replace('"', '') if item and item != '' else None for item in line]
@@ -101,7 +97,6 @@ def seed_database():
         
     except Exception as error:
         print(f"Error: {error}")
-        traceback.print_exc()  # Print the full traceback
         return f"Error seeding database: {error}"
 
 if __name__ == "__main__":

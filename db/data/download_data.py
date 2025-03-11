@@ -49,13 +49,16 @@ stock_list_data = pd.concat(stock_list_data)
 
 
 
-
+# Calculating the daily return percentage form the opening and closing price.
 stock_list_data['Daily_Return'] = (((stock_list_data['Close'] - stock_list_data['Open']) / stock_list_data['Open']) * 100)
 
+# Calculating the simple moving average.
 stock_list_data['SMA_200'] = stock_list_data.groupby("Company")['Close'].transform(lambda x: x.rolling(window=200).mean())
 
+# Calculating the Volatility.
 stock_list_data['Volatility'] = stock_list_data.groupby("Company")['Daily_Return'].transform(lambda x: x.rolling(window=50).std())
 
+# Rounding the daily return column to 2 decimal pounts and adding a percent sign.
 stock_list_data['Daily_Return'] = stock_list_data['Daily_Return'].round(2).astype(str) + '%'
 
 stock_list_data.round(2).to_csv("stocks.csv", index=False)
