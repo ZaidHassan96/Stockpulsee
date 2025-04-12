@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 
 
 
-production = True
+production = False
 
 if production:
 

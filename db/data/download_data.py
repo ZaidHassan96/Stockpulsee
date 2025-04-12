@@ -2,7 +2,7 @@ import yfinance as yf
 import pandas as pd
 
 
-# # list of tuples containing company symbols and names.
+# list of tuples containing company symbols and names.
 stocks = [
     ("AAPL", "Apple Inc."),
     ("MSFT", "Microsoft Corp."),
@@ -48,12 +48,13 @@ stock_list_data = pd.concat(stock_list_data)
 
 
 
-
 # Calculating the daily return percentage form the opening and closing price.
 stock_list_data['Daily_Return'] = (((stock_list_data['Close'] - stock_list_data['Open']) / stock_list_data['Open']) * 100)
 
 # Calculating the simple moving average.
 stock_list_data['SMA_200'] = stock_list_data.groupby("Company")['Close'].transform(lambda x: x.rolling(window=200).mean())
+# stock_list_data['SMA_200'] = stock_list_data.groupby("Company")["Close"].rolling(window=200).mean().reset_index(level=0, drop=True)
+
 
 # Calculating the Volatility.
 stock_list_data['Volatility'] = stock_list_data.groupby("Company")['Daily_Return'].transform(lambda x: x.rolling(window=50).std())
@@ -62,3 +63,19 @@ stock_list_data['Volatility'] = stock_list_data.groupby("Company")['Daily_Return
 stock_list_data['Daily_Return'] = stock_list_data['Daily_Return'].round(2).astype(str) + '%'
 
 stock_list_data.round(2).to_csv("stocks.csv", index=False)
+print(stock_list_data)
+
+# print(stock_list_data[200:])
+
+
+# stock_list_data = pd.read_csv("stocks.csv")
+
+
+# stock_list_data['SMA_200'] = stock_list_data.groupby("Company")["Close"].rolling(window=200).mean().reset_index(level=0, drop=True)
+
+
+# stock_list_data.round(2).to_csv("stocks.csv", index=False)
+
+
+
+# print(stock_list_data[200:])
