@@ -1,5 +1,7 @@
 ## Stockpulsee
 
+**Live Demo**: https://stockpulse1.streamlit.app/
+
 **Stockpulsee** allows users to view the top 21 tech stocks through an interactive visual display and raw data table. The application showcases key stock metrics, including:
 
 - **Volume**
